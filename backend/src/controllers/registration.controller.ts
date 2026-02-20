@@ -34,7 +34,7 @@ export class RegistrationController {
         });
       }
 
-      const validSports = ['Correr', 'Nadar', 'Gimnasio', 'Ninguno'];
+      const validSports = ['Correr', 'Nadar', 'Gimnasio', 'Baile', 'Futbol', 'Basket', 'Ninguno'];
       if (!Array.isArray(data.sports) || data.sports.length === 0) {
         return res.status(400).json({
           success: false,

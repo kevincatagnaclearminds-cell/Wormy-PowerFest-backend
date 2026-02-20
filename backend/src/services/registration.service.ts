@@ -101,6 +101,9 @@ export class RegistrationService {
       'Correr': sportCounts.get('Correr') || 0,
       'Nadar': sportCounts.get('Nadar') || 0,
       'Gimnasio': sportCounts.get('Gimnasio') || 0,
+      'Baile': sportCounts.get('Baile') || 0,
+      'Futbol': sportCounts.get('Futbol') || 0,
+      'Basket': sportCounts.get('Basket') || 0,
       'Ninguno': sportCounts.get('Ninguno') || 0,
     };
 
