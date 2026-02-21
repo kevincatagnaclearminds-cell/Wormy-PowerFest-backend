@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 3000;
 const prisma = new PrismaClient();
 
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+  origin: process.env.FRONTEND_URL || 'https://wpowerfests.vercel.app/',
   credentials: true,
 }));
 
