@@ -50,13 +50,6 @@ export class EmailService {
                     margin: 20px 0;
                   }
                   .qr-code { max-width: 300px; }
-                  .qr-fallback { 
-                    max-width: 300px; 
-                    max-height: 0 !important; 
-                    overflow: hidden !important; 
-                    mso-hide: all;
-                    display: none !important;
-                  }
                   .ticket-id { 
                     font-family: monospace; 
                     color: #666; 
@@ -80,7 +73,6 @@ export class EmailService {
                   <div class="qr-container">
                     <h2>Tu Código QR</h2>
                     <img src="cid:qrcode" alt="QR Code" class="qr-code"/>
-                    <img src="${qrCodeDataURL}" alt="QR Code" class="qr-fallback"/>
                     <p class="ticket-id">ID: ${ticketId}</p>
                   </div>
                   
