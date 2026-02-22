@@ -4,6 +4,7 @@ import { RegistrationController } from '../controllers/registration.controller';
 const router = Router();
 const controller = new RegistrationController();
 
+router.get('/search', (req, res) => controller.searchByCedula(req, res));
 router.post('/', (req, res) => controller.create(req, res));
 router.get('/', (req, res) => controller.getAll(req, res));
 router.get('/:id', (req, res) => controller.getById(req, res));

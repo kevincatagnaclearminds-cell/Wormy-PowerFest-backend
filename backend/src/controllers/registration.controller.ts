@@ -363,4 +363,46 @@ export class RegistrationController {
       });
     }
   }
+
+  async searchByCedula(req: Request, res: Response) {
+    try {
+      const { cedula } = req.query;
+
+      if (!cedula || typeof cedula !== 'string') {
+        return res.status(400).json({
+          success: false,
+          error: 'La cédula es requerida'
+        });
+      }
+
+      // Validar formato de cédula
+      const cedulaRegex = /^\d{10}$/;
+      if (!cedulaRegex.test(cedula)) {
+        return res.status(400).json({
+          success: false,
+          error: 'La cédula debe tener 10 dígitos'
+        });
+      }
+
+      const registration = await registrationService.getRegistrationByCedula(cedula);
+
+      if (!registration) {
+        return res.status(404).json({
+          success: false,
+          error: 'No se encontró ningún registro con esta cédula'
+        });
+      }
+
+      res.json({
+        success: true,
+        data: registration
+      });
+    } catch (error) {
+      console.error('Error searching by cedula:', error);
+      res.status(500).json({
+        success: false,
+        error: 'Error al buscar registro'
+      });
+    }
+  }
 }

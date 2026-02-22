@@ -42,6 +42,12 @@ export class RegistrationService {
     });
   }
 
+  async getRegistrationByCedula(cedula: string) {
+    return await prisma.registration.findFirst({
+      where: { cedula },
+    });
+  }
+
   async updateRegistration(id: string, data: { email?: string; phone?: string }) {
     try {
       return await prisma.registration.update({
