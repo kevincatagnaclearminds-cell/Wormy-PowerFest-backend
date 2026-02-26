@@ -37,7 +37,7 @@ export const sendReservationEmail = async (
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          from: process.env.ESCAPEROOM_FROM_EMAIL || 'Escape Room <info@krakedev.com>',
+          from: 'info@krakedev.com',
           to: to,
           subject: '🎉 Confirmación de Reserva - Escape Room',
           html: `
