@@ -29,10 +29,7 @@ export class ReservationService {
     );
 
     if (activeReservation) {
-      const timeslotInfo = activeReservation.timeslotId 
-        ? ` para el turno de las ${activeReservation.timeslot?.startTime || 'horario asignado'}`
-        : '';
-      throw new ConflictError(`Ya tienes una reserva activa${timeslotInfo}. No puedes crear múltiples reservas. Si necesitas cambiar tu turno, usa la opción de reenvío de QR.`);
+      throw new ConflictError(`Ya tienes una reserva activa. No puedes crear múltiples reservas. Si necesitas cambiar tu turno, usa la opción de reenvío de QR.`);
     }
 
     // 2. Verificar que el turno existe y tiene capacidad disponible
