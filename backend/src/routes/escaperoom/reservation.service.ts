@@ -734,6 +734,7 @@ export class ReservationService {
     }
 
     // 6. Regenerar imagen QR (mismo código)
+    console.log(`🔑 Reenviando QR con código: ${activeReservation.qrCode}`);
     const qrImage = await generateQR(activeReservation.qrCode);
 
     // 7. Preparar objeto de reserva con estructura correcta para los servicios de notificación

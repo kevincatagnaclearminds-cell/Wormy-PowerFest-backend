@@ -8,6 +8,8 @@ import { sendReservationWhatsApp } from '../../services/escaperoom/services/what
 export class CheckinService {
   // Validar QR sin hacer check-in (solo obtener datos)
   async getReservationByQR(qrCode: string) {
+    console.log(`🔍 Buscando reserva con QR: ${qrCode}`);
+    
     const reservation = await prisma.reservation.findUnique({
       where: { qrCode },
       include: {
@@ -17,8 +19,11 @@ export class CheckinService {
     });
 
     if (!reservation) {
-      throw new NotFoundError('Código QR no válido. No se encontró ninguna reserva asociada a este código. Verifica que el QR sea correcto o contacta al personal del evento.');
+      console.log(`❌ No se encontró reserva con QR: ${qrCode}`);
+      throw new NotFoundError(`Código QR no válido. No se encontró ninguna reserva asociada a este código (${qrCode.substring(0, 8)}...). Verifica que el QR sea correcto o contacta al personal del evento.`);
     }
+    
+    console.log(`✅ Reserva encontrada: ${reservation.id} - Usuario: ${reservation.user.email} - Status: ${reservation.status}`);
 
     if (reservation.status === 'USED') {
       const usedDate = reservation.checkedInAt 
