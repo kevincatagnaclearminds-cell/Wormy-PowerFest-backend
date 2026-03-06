@@ -128,6 +128,9 @@ export class RegistrationController {
       }
       const registration = await registrationService.createRegistration(data);
 
+      // Generar QR code
+      const qrCodeDataURL = await emailService.generateQRCode(registration.id);
+
       // Enviar QR solo por email
       const emailResult = await emailService.sendQREmail(
         registration.email,
@@ -138,7 +141,10 @@ export class RegistrationController {
 
       res.status(201).json({
         success: true,
-        data: registration,
+        data: {
+          ...registration,
+          qrCode: qrCodeDataURL // Incluir QR en la respuesta
+        },
         notifications: {
           email: emailResult
         }

@@ -1,6 +1,18 @@
 import QRCode from 'qrcode';
 
 export class EmailService {
+  // Método público para generar QR
+  async generateQRCode(ticketId: string): Promise<string> {
+    return await QRCode.toDataURL(ticketId, {
+      width: 400,
+      margin: 2,
+      color: {
+        dark: '#000000',
+        light: '#FFFFFF'
+      }
+    });
+  }
+
   async sendQREmail(email: string, firstName: string, lastName: string, ticketId: string) {
     try {
       console.log('📧 Intentando enviar email a:', email);
@@ -9,14 +21,7 @@ export class EmailService {
       console.log('📨 FROM_EMAIL completo:', process.env.FROM_EMAIL);
       
       // Generar QR como imagen base64
-      const qrCodeDataURL = await QRCode.toDataURL(ticketId, {
-        width: 400,
-        margin: 2,
-        color: {
-          dark: '#000000',
-          light: '#FFFFFF'
-        }
-      });
+      const qrCodeDataURL = await this.generateQRCode(ticketId);
 
       // Extraer solo el base64 sin el prefijo para el attachment
       const base64Data = qrCodeDataURL.split(',')[1];
